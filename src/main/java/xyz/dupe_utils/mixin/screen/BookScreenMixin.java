@@ -31,7 +31,6 @@ public class BookScreenMixin extends Screen {
         if (SharedVariables.enabled) {
             DupeUtilsScreen.createWidgets(mc, this);
 
-            // create chat box
             TextFieldWidget addressField = new TextFieldWidget(textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                 @Override
                 public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
@@ -50,7 +49,7 @@ public class BookScreenMixin extends Screen {
                                 mc.getNetworkHandler().sendChatMessage(this.getText());
                             }
                         } else {
-                            DupeUtils.LOGGER.warn("Minecraft network handler (mc.getNetworkHandler()) was null while trying to send chat message from UI Utils.");
+                            DupeUtils.LOGGER.warn("Minecraft network handler (mc.getNetworkHandler()) was null while trying to send chat message from Dupe Utils.");
                         }
 
                         this.setText("");
