@@ -12,5 +12,10 @@
   </a>
   <img src="https://img.shields.io/badge/License-GPL--3.0-F5DEB3?style=for-the-badge&logoColor=white">
   <img src="https://img.shields.io/badge/Dupe%20Utils%201.21.4-v1.0.0-D2B48C?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Minecraft-1.20.4-F0E4D7?style=for-the-badge&logo=minecraft&logoColor=black">
+  <img src="https://img.shields.io/badge/Minecraft-1.21.4-F0E4D7?style=for-the-badge&logo=minecraft&logoColor=black">
 </p>
+
+---
+### Dupe Utils is a free Minecraft 1.21.4 mod that provides tools for interacting with GUI systems and packets.
+---
+
