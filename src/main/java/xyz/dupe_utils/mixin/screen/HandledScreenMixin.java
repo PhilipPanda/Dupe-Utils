@@ -1,7 +1,8 @@
 package xyz.dupe_utils.mixin.screen;
 
 import xyz.dupe_utils.DupeUtils;
-import xyz.dupe_utils.gui.GuiUtils;
+import xyz.dupe_utils.gui.DupeUtilsScreen;
+import xyz.dupe_utils.utils.CommandManager;
 import xyz.dupe_utils.utils.SharedVariables;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -47,21 +48,19 @@ public abstract class HandledScreenMixin extends Screen {
     @Inject(at = @At("TAIL"), method = "init")
     public void init(CallbackInfo ci) {
         if (SharedVariables.enabled) {
-            GuiUtils.createWidgets(mc, this);
+            DupeUtilsScreen.createWidgets(mc, this);
 
             // create chat box
             this.addressField = new TextFieldWidget(this.textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                 @Override
                 public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
                     if (keyCode == GLFW.GLFW_KEY_ENTER) {
-                        if (this.getText().equals("^toggleuiutils")) {
-                            SharedVariables.enabled = !SharedVariables.enabled;
-                            if (mc.player != null) {
-                                mc.player.sendMessage(Text.of("UI-Utils is now " + (SharedVariables.enabled ? "enabled" : "disabled") + "."), false);
-
-                            }
-                            return false;
+                        if (this.getText().startsWith(".")) {
+                            CommandManager.handle(this.getText());
+                            this.setText("");
+                            return true;
                         }
+
 
                         if (mc.getNetworkHandler() != null) {
                             if (this.getText().startsWith("/")) {
@@ -115,7 +114,7 @@ public abstract class HandledScreenMixin extends Screen {
         // this hurts me physically to look at this in a render method :(
         // im too lazy to fix it tho :D
         if (SharedVariables.enabled) {
-            GuiUtils.createText(mc, context, this.textRenderer);
+            DupeUtilsScreen.createText(mc, context, this.textRenderer);
         }
     }
 }

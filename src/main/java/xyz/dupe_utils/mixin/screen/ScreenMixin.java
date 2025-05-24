@@ -1,6 +1,7 @@
 package xyz.dupe_utils.mixin.screen;
 
-import xyz.dupe_utils.gui.GuiUtils;
+import xyz.dupe_utils.gui.DupeUtilsScreen;
+import xyz.dupe_utils.utils.CommandManager;
 import xyz.dupe_utils.utils.SharedVariables;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -47,20 +48,19 @@ public abstract class ScreenMixin {
                 // ill clean this up later if you dont fix it
 
                 TextRenderer textRenderer = ((ScreenAccessor) this).getTextRenderer();
-                GuiUtils.createWidgets(mc, screen);
+                DupeUtilsScreen.createWidgets(mc, screen);
 
                 // create chat box
                 this.addressField = new TextFieldWidget(textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                     @Override
                     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
                         if (keyCode == GLFW.GLFW_KEY_ENTER) {
-                            if (this.getText().equals("^toggleuiutils")) {
-                                SharedVariables.enabled = !SharedVariables.enabled;
-                                if (mc.player != null) {
-                                    mc.player.sendMessage(Text.of("UI-Utils is now " + (SharedVariables.enabled ? "enabled" : "disabled") + "."), false);
-                                }
-                                return false;
+                            if (this.getText().startsWith(".")) {
+                                CommandManager.handle(this.getText());
+                                this.setText("");
+                                return true;
                             }
+
 
                             if (mc.getNetworkHandler() != null) {
                                 if (this.getText().startsWith("/")) {
@@ -90,7 +90,7 @@ public abstract class ScreenMixin {
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         // display sync id, revision, if ui utils is enabled
         if (SharedVariables.enabled && mc.player != null && mc.currentScreen instanceof LecternScreen) {
-            GuiUtils.createText(mc, context, ((ScreenAccessor) this).getTextRenderer());
+            DupeUtilsScreen.createText(mc, context, ((ScreenAccessor) this).getTextRenderer());
         }
     }
 }

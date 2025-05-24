@@ -9,11 +9,18 @@ import net.minecraft.text.Text;
 import xyz.dupe_utils.DupeUtils;
 import xyz.dupe_utils.utils.SharedVariables;
 
-public class GuiUtils {
+public class DupeUtilsScreen {
     public static void createText(MinecraftClient mc, DrawContext context, TextRenderer textRenderer) {
-        context.drawText(textRenderer, "Sync Id: " + mc.player.currentScreenHandler.syncId, 200, 5, 0xFFFFFFFF, false);
-        context.drawText(textRenderer, "Revision: " + mc.player.currentScreenHandler.getRevision(), 200, 35, 0xFFFFFFFF, false);
+        if (mc.player == null || mc.player.currentScreenHandler == null) return;
+
+        int textX = 180;
+        int textY = 15;
+        int spacing = 20;
+
+        context.drawText(textRenderer, "Sync Id: " + mc.player.currentScreenHandler.syncId, textX, textY, 0xFFFFFFFF, false);
+        context.drawText(textRenderer, "Revision: " + mc.player.currentScreenHandler.getRevision(), textX, textY + spacing, 0xFFFFFFFF, false);
     }
+
 
     public static void createWidgets(MinecraftClient mc, Screen screen) {
         screen.addDrawableChild(ButtonWidget.builder(Text.of("Close without packet"), b -> mc.setScreen(null)).width(115).position(5, 5).build());
