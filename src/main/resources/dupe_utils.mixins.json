@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.dupe_utils.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "screen.BookEditScreenMixin",
+    "screen.BookScreenMixin",
+    "screen.ScreenMixin",
+    "screen.SignEditScreenMixin",
+    "screen.SleepingChatScreenMixin",
+    "accessor.ScreenAccessor",
+    "screen.ChatScreenMixin",
+    "network.ClientCommonNetworkHandlerMixin",
+    "network.ClientConnectionMixin",
+    "screen.HandledScreenMixin",
+    "screen.MultiplayerScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "accessor.ClientConnectionAccessor"
+  ]
+}

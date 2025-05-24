@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "dupe_utils",
+  "version": "${version}",
+
+  "name": "Dupe Utils",
+  "description": "Dupe Utils is a Minecraft mod that provides tools for interacting with GUI systems and packets.",
+  "authors": [
+    "PhilipPanda"
+  ],
+  "contact": {
+    "homepage": "https://templecheats.xyz",
+    "sources": "https://github.com/PhilipPanda/Dupe-Utils"
+  },
+
+  "icon": "assets/dupe_utils/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "xyz.dupe_utils.DupeUtils"
+    ]
+  },
+  "mixins": [
+    "dupe_utils.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "fabric": "*",
+    "minecraft": "~1.21.4",
+    "java": ">=21"
+  },
+
+  "accessWidener": "dupe_utils.accesswidener",
+
+  "suggests": {
+    "another-mod": "*"
+  },
+
+  "breaks": {
+    "modernfix": "*",
+    "wurst": "*",
+    "essential": "*"
+  },
+
+  "custom": {
+    "modmenu:clientsideOnly": true,
+    "modmenu:api": false
+  }
+}
