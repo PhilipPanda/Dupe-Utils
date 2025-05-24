@@ -1,13 +1,13 @@
 package xyz.dupe_utils.utils;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.Locale;
 
+import static xyz.dupe_utils.DupeUtils.mc;
+
 public class CommandManager {
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     public static void handle(String input) {
         if (!input.startsWith(".")) return;

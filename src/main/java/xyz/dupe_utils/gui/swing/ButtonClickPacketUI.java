@@ -1,12 +1,12 @@
-package xyz.dupe_utils.gui;
+package xyz.dupe_utils.gui.swing;
 
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.c2s.play.ButtonClickC2SPacket;
 import xyz.dupe_utils.DupeUtils;
 import xyz.dupe_utils.utils.PacketScheduler;
 
 import javax.swing.*;
 import java.awt.*;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.c2s.play.ButtonClickC2SPacket;
 
 public class ButtonClickPacketUI {
     public void open() {

@@ -1,15 +1,15 @@
-package xyz.dupe_utils.gui;
+package xyz.dupe_utils.gui.swing;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
+import net.minecraft.screen.slot.SlotActionType;
 import xyz.dupe_utils.DupeUtils;
 import xyz.dupe_utils.utils.PacketScheduler;
 
 import javax.swing.*;
 import java.awt.*;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
-import net.minecraft.screen.slot.SlotActionType;
-import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 
 public class ClickSlotPacketUI {
     public void open() {

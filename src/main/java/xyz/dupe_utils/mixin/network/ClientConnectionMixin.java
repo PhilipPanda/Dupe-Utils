@@ -1,6 +1,5 @@
 package xyz.dupe_utils.mixin.network;
 
-import xyz.dupe_utils.utils.SharedVariables;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketCallbacks;
 import net.minecraft.network.packet.Packet;
@@ -11,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.dupe_utils.utils.SharedVariables;
 
 @Mixin(ClientConnection.class)
 public class ClientConnectionMixin {

@@ -1,4 +1,4 @@
-package xyz.dupe_utils.gui;
+package xyz.dupe_utils.gui.swing;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

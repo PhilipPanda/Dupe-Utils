@@ -1,30 +1,28 @@
 package xyz.dupe_utils.mixin.screen;
 
-import xyz.dupe_utils.gui.DupeUtilsScreen;
-import xyz.dupe_utils.utils.CommandManager;
-import xyz.dupe_utils.utils.SharedVariables;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.dupe_utils.DupeUtils;
+import xyz.dupe_utils.gui.swing.DupeUtilsScreen;
+import xyz.dupe_utils.utils.CommandManager;
+import xyz.dupe_utils.utils.SharedVariables;
 
 import java.util.regex.Pattern;
+
+import static xyz.dupe_utils.DupeUtils.mc;
 
 @Mixin(BookScreen.class)
 public class BookScreenMixin extends Screen {
     protected BookScreenMixin(Text title) {
         super(title);
     }
-    @Unique
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     @Inject(at = @At("TAIL"), method = "init")
     public void init(CallbackInfo ci) {

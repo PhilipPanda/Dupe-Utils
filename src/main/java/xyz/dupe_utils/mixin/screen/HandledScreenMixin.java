@@ -1,10 +1,5 @@
 package xyz.dupe_utils.mixin.screen;
 
-import xyz.dupe_utils.DupeUtils;
-import xyz.dupe_utils.gui.DupeUtilsScreen;
-import xyz.dupe_utils.utils.CommandManager;
-import xyz.dupe_utils.utils.SharedVariables;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -21,8 +16,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.dupe_utils.DupeUtils;
+import xyz.dupe_utils.gui.swing.DupeUtilsScreen;
+import xyz.dupe_utils.utils.CommandManager;
+import xyz.dupe_utils.utils.SharedVariables;
 
 import java.util.regex.Pattern;
+
+import static xyz.dupe_utils.DupeUtils.mc;
 
 @Mixin(HandledScreen.class)
 public abstract class HandledScreenMixin extends Screen {
@@ -32,14 +33,13 @@ public abstract class HandledScreenMixin extends Screen {
 
     @Shadow
     protected abstract boolean handleHotbarKeyPressed(int keyCode, int scanCode);
+
     @Shadow
     protected abstract void onMouseClick(Slot slot, int slotId, int button, SlotActionType actionType);
+
     @Shadow
     @Nullable
     protected Slot focusedSlot;
-
-    @Unique
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     @Unique
     private TextFieldWidget addressField;
@@ -68,7 +68,7 @@ public abstract class HandledScreenMixin extends Screen {
                             } else {
                                 mc.getNetworkHandler().sendChatMessage(this.getText());
                             }
-                    } else {
+                        } else {
                             DupeUtils.LOGGER.warn("Minecraft network handler (mc.getNetworkHandler()) was null while trying to send chat message from UI Utils.");
                         }
 
@@ -89,7 +89,7 @@ public abstract class HandledScreenMixin extends Screen {
         cir.cancel();
         if (super.keyPressed(keyCode, scanCode, modifiers)) {
             cir.setReturnValue(true);
-        } else if (DupeUtils.mc.options.inventoryKey.matchesKey(keyCode, scanCode) && (this.addressField == null || !this.addressField.isSelected())) {
+        } else if (mc.options.inventoryKey.matchesKey(keyCode, scanCode) && (this.addressField == null || !this.addressField.isSelected())) {
             // Crashes if address field does not exist (because of ui utils disabled, this is a temporary fix.)
             this.close();
             cir.setReturnValue(true);

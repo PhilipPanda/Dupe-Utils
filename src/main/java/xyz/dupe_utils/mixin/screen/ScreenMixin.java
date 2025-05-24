@@ -1,8 +1,5 @@
 package xyz.dupe_utils.mixin.screen;
 
-import xyz.dupe_utils.gui.DupeUtilsScreen;
-import xyz.dupe_utils.utils.CommandManager;
-import xyz.dupe_utils.utils.SharedVariables;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -20,17 +17,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.dupe_utils.DupeUtils;
+import xyz.dupe_utils.gui.swing.DupeUtilsScreen;
 import xyz.dupe_utils.mixin.accessor.ScreenAccessor;
+import xyz.dupe_utils.utils.CommandManager;
+import xyz.dupe_utils.utils.SharedVariables;
 
 import java.util.regex.Pattern;
+
+import static xyz.dupe_utils.DupeUtils.mc;
 
 @SuppressWarnings("all")
 @Mixin(Screen.class)
 public abstract class ScreenMixin {
     @Shadow
     public abstract <T extends Element & Drawable & Selectable> T addDrawableChild(T drawableElement);
-
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     private TextFieldWidget addressField;
     private boolean initialized = false;
