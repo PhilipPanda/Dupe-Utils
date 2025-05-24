@@ -37,7 +37,15 @@ public class CommandManager {
     }
 
     private static void sendUsage() {
-        sendMsg("[DupeUtils] Usage: .dupeutils enable | disable", Formatting.GRAY);
+        if (mc.player == null) return;
+
+        Text msg = Text.literal("[")
+                .formatted(Formatting.WHITE)
+                .append(Text.literal("DupeUtils").formatted(Formatting.GOLD))
+                .append(Text.literal("] Usage: ").formatted(Formatting.WHITE))
+                .append(Text.literal(".dupeutils enable | disable").formatted(Formatting.GRAY));
+
+        mc.player.sendMessage(msg, false);
     }
 
     private static void sendToggleMessage(boolean enabled) {
