@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.dupe_utils.DupeUtils;
-import xyz.dupe_utils.gui.swing.DupeUtilsScreen;
+import xyz.dupe_utils.utils.DupeUtilsScreen;
 import xyz.dupe_utils.utils.CommandManager;
 import xyz.dupe_utils.utils.SharedVariables;
 
@@ -48,8 +48,6 @@ public abstract class HandledScreenMixin extends Screen {
     @Inject(at = @At("TAIL"), method = "init")
     public void init(CallbackInfo ci) {
         if (SharedVariables.enabled) {
-            DupeUtilsScreen.createWidgets(mc, this);
-
             // create chat box
             this.addressField = new TextFieldWidget(this.textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                 @Override

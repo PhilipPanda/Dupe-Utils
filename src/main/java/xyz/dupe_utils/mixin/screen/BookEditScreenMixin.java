@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.dupe_utils.DupeUtils;
-import xyz.dupe_utils.gui.swing.DupeUtilsScreen;
 import xyz.dupe_utils.utils.CommandManager;
 import xyz.dupe_utils.utils.SharedVariables;
 
@@ -27,8 +26,6 @@ public class BookEditScreenMixin extends Screen {
     @Inject(at = @At("TAIL"), method = "init")
     public void init(CallbackInfo ci) {
         if (SharedVariables.enabled) {
-            DupeUtilsScreen.createWidgets(mc, this);
-
             TextFieldWidget addressField = new TextFieldWidget(textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                 @Override
                 public boolean keyPressed(int keyCode, int scanCode, int modifiers) {

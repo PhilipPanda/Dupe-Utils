@@ -4,17 +4,14 @@
   "package": "xyz.dupe_utils.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "screen.BookEditScreenMixin",
-    "screen.BookScreenMixin",
-    "screen.ScreenMixin",
-    "screen.SignEditScreenMixin",
-    "screen.SleepingChatScreenMixin",
     "accessor.ScreenAccessor",
-    "screen.ChatScreenMixin",
     "network.ClientCommonNetworkHandlerMixin",
     "network.ClientConnectionMixin",
+    "screen.BookEditScreenMixin",
+    "screen.BookScreenMixin",
+    "screen.ChatScreenMixin",
     "screen.HandledScreenMixin",
-    "screen.MultiplayerScreenMixin"
+    "screen.ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
