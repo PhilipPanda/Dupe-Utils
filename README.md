@@ -19,3 +19,13 @@
 ### Dupe Utils is a free Minecraft 1.21.4 mod that provides tools for interacting with GUI systems and packets.
 ---
 
+1. Install **Minecraft 1.21.4**.
+2. Install the latest **Fabric Loader** for Minecraft 1.21.4 ([Download](https://fabricmc.net/use/installer/)).
+3. Download and install the matching version of the Fabric API.
+4. Download the latest version of **Dupe-Utils** from the [Releases](#) tab.
+5. Move the downloaded `.jar` file into your `.minecraft/mods` folder.
+
+---
+
+## Credits
+- [UI-Utils](https://github.com/Coderx-Gamer/ui-utils)
