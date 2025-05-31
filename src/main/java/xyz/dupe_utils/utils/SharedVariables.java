@@ -17,6 +17,7 @@ public class SharedVariables {
     public static ScreenHandler storedScreenHandler = null;
 
     public static boolean enabled = true;
-    public static boolean bypassResourcePack = false;
     public static boolean resourcePackForceDeny = false;
+
+    public static boolean crashEnabled = true;
 }

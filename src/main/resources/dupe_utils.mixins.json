@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "accessor.ScreenAccessor",
-    "network.ClientCommonNetworkHandlerMixin",
     "network.ClientConnectionMixin",
     "screen.BookEditScreenMixin",
     "screen.BookScreenMixin",

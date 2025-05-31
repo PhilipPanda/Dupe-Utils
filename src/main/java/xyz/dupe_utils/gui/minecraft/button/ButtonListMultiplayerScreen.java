@@ -17,13 +17,6 @@ public class ButtonListMultiplayerScreen extends ButtonListHelper<MultiplayerScr
     @Override
     public void createButton() {
         if (SharedVariables.enabled) {
-
-            add(new Button(coloredBoolText("Bypass Resource Pack: ", SharedVariables.bypassResourcePack), (button) -> {
-                SharedVariables.bypassResourcePack = !SharedVariables.bypassResourcePack;
-                button.setText(coloredBoolText("Bypass Resource Pack: ", SharedVariables.bypassResourcePack));
-                clear();
-            }).position(5, 5));
-
             add(new Button(coloredBoolText("Force Deny: ", SharedVariables.resourcePackForceDeny), (button) -> {
                 SharedVariables.resourcePackForceDeny = !SharedVariables.resourcePackForceDeny;
                 button.setText(coloredBoolText("Force Deny: ", SharedVariables.resourcePackForceDeny));

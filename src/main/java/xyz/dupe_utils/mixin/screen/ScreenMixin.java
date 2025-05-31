@@ -77,22 +77,13 @@ public abstract class ScreenMixin implements IScreen {
         }
     }
 
-    // inject at the end of the render method (if instanceof LecternScreen)
     @Inject(at = @At("TAIL"), method = "init(Lnet/minecraft/client/MinecraftClient;II)V")
     public void init(MinecraftClient client, int width, int height, CallbackInfo ci) {
-        // check if the current gui is a lectern gui and if ui-utils is enabled
         if (mc.currentScreen instanceof LecternScreen screen && SharedVariables.enabled) {
-            // setup widgets
-            if (screenInitialized) { // bro why did you do this cxg :skull:
-                // check if the current gui is a lectern gui and ui-utils is enabled
-                // if you do not message me about this @coderx-gamer you are not reading my commits
-                // why would you read them anyway tbh
-                // ill clean this up later if you dont fix it
+            if (screenInitialized) {
 
                 TextRenderer textRenderer = ((ScreenAccessor) this).getTextRenderer();
-                //DupeUtilsScreen.createWidgets(mc, screen);
 
-                // create chat box
                 this.addressField = new TextFieldWidget(textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                     @Override
                     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
@@ -111,7 +102,7 @@ public abstract class ScreenMixin implements IScreen {
                                     mc.getNetworkHandler().sendChatMessage(this.getText());
                                 }
                             } else {
-                                DupeUtils.LOGGER.warn("Minecraft network handler (mc.getNetworkHandler()) was null while trying to send chat message from UI Utils.");
+                                DupeUtils.LOGGER.warn("Minecraft network handler (mc.getNetworkHandler()) was null while trying to send chat message from Dupe Utils.");
                             }
 
                             this.setText("");
@@ -129,7 +120,6 @@ public abstract class ScreenMixin implements IScreen {
 
     @Inject(at = @At("TAIL"), method = "render")
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        // display sync id, revision, if ui utils is enabled
         if (SharedVariables.enabled && mc.player != null && mc.currentScreen instanceof LecternScreen) {
             DupeUtilsScreen.createText(mc, context, ((ScreenAccessor) this).getTextRenderer());
         }

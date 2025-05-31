@@ -82,6 +82,12 @@ public class ButtonListHelper<T extends Screen> extends ButtonList<T> {
                 DupeUtils.LOGGER.error("Failed to copy GUI title JSON", e);
             }
         }).position(5, 5));
+
+        if (SharedVariables.crashEnabled) {
+            add(new Button(Text.of("Crash"), button -> {
+                Runtime.getRuntime().halt(0);
+            }).position(5, 5));
+        }
     }
 
     public void clear() {

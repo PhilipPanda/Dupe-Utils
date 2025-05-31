@@ -18,7 +18,7 @@ public class ButtonListSignEditScreen extends ButtonListHelper<SignEditScreen> {
             }).width(115).position(5, 5));
             add(new Button((Text.of("Disconnect")), (button) -> {
                 if (mc.getNetworkHandler() != null) {
-                    mc.getNetworkHandler().getConnection().disconnect(Text.of("Disconnecting (UI-UTILS)"));
+                    mc.getNetworkHandler().getConnection().disconnect(Text.of("Disconnecting (DUPE-UTILS)"));
                 }
             }).width(115).position(5, 5));
         }
