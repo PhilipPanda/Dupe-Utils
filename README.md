@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/badge/Discord-E4CDA1?style=for-the-badge&logo=discord&logoColor=white">
   </a>
   <img src="https://img.shields.io/badge/License-GPL--3.0-F5DEB3?style=for-the-badge&logoColor=white">
-  <img src="https://img.shields.io/badge/Dupe%20Utils%201.21.4-v1.0.1-D2B48C?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Dupe%20Utils%201.21.4-v1.0.2-D2B48C?style=for-the-badge">
   <img src="https://img.shields.io/badge/Minecraft-1.21.4-F0E4D7?style=for-the-badge&logo=minecraft&logoColor=black">
 </p>
 
