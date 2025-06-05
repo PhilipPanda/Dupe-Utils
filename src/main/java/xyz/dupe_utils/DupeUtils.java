@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ public class DupeUtils implements ClientModInitializer {
     public static Color darkWhite;
 
     public static KeyBinding restoreKey;
+    public static KeyBinding unloadChunksKey;
+
 
     public static final Logger LOGGER = LoggerFactory.getLogger("dupe_utils");
     public static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -32,11 +35,24 @@ public class DupeUtils implements ClientModInitializer {
                 new KeyBinding("Restore Saved GUI", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "Dupe Utils")
         );
 
+        unloadChunksKey = KeyBindingHelper.registerKeyBinding( // ✅ Register new key
+                new KeyBinding("Unload Rendered Chunks", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "Dupe Utils")
+        );
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (restoreKey.wasPressed()) {
                 if (SharedVariables.storedScreen != null && SharedVariables.storedScreenHandler != null && client.player != null) {
                     client.setScreen(SharedVariables.storedScreen);
                     client.player.currentScreenHandler = SharedVariables.storedScreenHandler;
+                }
+            }
+
+            while (unloadChunksKey.wasPressed()) {
+                if (mc.worldRenderer != null) {
+                    mc.worldRenderer.reload();
+                    if (mc.player != null) {
+                        mc.player.sendMessage(Text.of("Chunks unloaded (render reload triggered)."), false);
+                    }
                 }
             }
         });

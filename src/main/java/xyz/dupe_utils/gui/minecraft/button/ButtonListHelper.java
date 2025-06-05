@@ -68,6 +68,16 @@ public class ButtonListHelper<T extends Screen> extends ButtonList<T> {
             SharedVariables.delayedUIPackets.clear();
         }).position(5, 5));
 
+        add(new Button(Text.of("Unload Chunks"), button -> {
+            if (mc.worldRenderer != null) {
+                mc.worldRenderer.reload();
+                if (mc.player != null) {
+                    mc.player.sendMessage(Text.of("Chunks unloaded (render reload triggered)."), false);
+                }
+            }
+        }).position(5, 5));
+
+
         Button fabricatePacketButton = new Button(Text.of("Fabricate Packet"), button -> FabricatePacketUI.open()).position(5, 5);
         fabricatePacketButton.setVisible(!MinecraftClient.IS_SYSTEM_MAC);
 
