@@ -1,10 +1,10 @@
 package xyz.dupe_utils.gui.swing;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.screen.sync.ItemStackHash;
 import xyz.dupe_utils.DupeUtils;
 import xyz.dupe_utils.utils.PacketScheduler;
 
@@ -61,12 +61,12 @@ public class ClickSlotPacketUI {
             try {
                 int syncId = Integer.parseInt(syncIdField.getText());
                 int revision = Integer.parseInt(revisionField.getText());
-                int slot = Integer.parseInt(slotField.getText());
-                int button = Integer.parseInt(buttonField.getText());
+                short slot = (short)Integer.parseInt(slotField.getText());
+                byte button = (byte)Integer.parseInt(buttonField.getText());
                 int times = Integer.parseInt(timesField.getText());
                 SlotActionType action = SlotActionType.valueOf((String) actionCombo.getSelectedItem());
 
-                Packet<?> packet = new ClickSlotC2SPacket(syncId, revision, slot, button, action, ItemStack.EMPTY, new Int2ObjectArrayMap<>());
+                Packet<?> packet = new ClickSlotC2SPacket(syncId, revision, slot, button, action, new Int2ObjectArrayMap<>(), ItemStackHash.EMPTY);
                 Runnable task = () -> {
                     if (DupeUtils.mc.getNetworkHandler() != null) {
                         DupeUtils.mc.getNetworkHandler().sendPacket(packet);

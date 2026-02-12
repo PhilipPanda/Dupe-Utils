@@ -1,6 +1,7 @@
 package xyz.dupe_utils.gui.minecraft.panel;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.input.KeyInput;
 
 public interface IPanel {
 
@@ -20,7 +21,7 @@ public interface IPanel {
         return false;
     }
 
-    default boolean keyPressed(int keyCode, int scanCode, int modifiers){
+    default boolean keyPressed(KeyInput input){
         return false;
     }
 

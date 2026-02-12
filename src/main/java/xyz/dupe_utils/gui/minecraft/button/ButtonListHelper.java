@@ -19,12 +19,17 @@ public class ButtonListHelper<T extends Screen> extends ButtonList<T> {
 
     public void createButton() {
         add(new Button(Text.of("Close without packet"), (button) -> {
+            DupeUtils.LOGGER.info("Closing screen without packet");
+            if (mc.player != null) {
+                mc.player.sendMessage(Text.of("§7[DupeUtils] Screen closed without packet"), false);
+            }
             mc.setScreen(null);
         }).position(5, 5));
 
         add(new Button(Text.of("De-Sync"), (button) -> {
             if (mc.getNetworkHandler() != null && mc.player != null) {
                 mc.getNetworkHandler().sendPacket(new CloseHandledScreenC2SPacket(mc.player.currentScreenHandler.syncId));
+                mc.player.sendMessage(Text.of("§7[DupeUtils] De-sync packet sent"), false);
             } else {
                 DupeUtils.LOGGER.warn("NetworkHandler or player was null in 'De-Sync'");
             }
@@ -56,6 +61,7 @@ public class ButtonListHelper<T extends Screen> extends ButtonList<T> {
             if (mc.player != null) {
                 SharedVariables.storedScreen = mc.currentScreen;
                 SharedVariables.storedScreenHandler = mc.player.currentScreenHandler;
+                mc.player.sendMessage(Text.of("§7[DupeUtils] GUI saved! Press V to restore"), false);
             }
         }).position(5, 5));
 
@@ -79,17 +85,17 @@ public class ButtonListHelper<T extends Screen> extends ButtonList<T> {
 
 
         Button fabricatePacketButton = new Button(Text.of("Fabricate Packet"), button -> FabricatePacketUI.open()).position(5, 5);
-        fabricatePacketButton.setVisible(!MinecraftClient.IS_SYSTEM_MAC);
+        fabricatePacketButton.setVisible(!System.getProperty("os.name").toLowerCase().contains("mac"));
 
         add(fabricatePacketButton);
 
-        add(new Button(Text.of("Copy GUI Title JSON"), button -> {
+        add(new Button(Text.of("Copy GUI Title"), button -> {
             try {
                 if (mc.currentScreen == null) throw new IllegalStateException("Screen is null");
-                mc.keyboard.setClipboard(Text.Serialization.toJsonString(mc.currentScreen.getTitle(), mc.getNetworkHandler() != null ? mc.getNetworkHandler().getRegistryManager() : MinecraftClient.getInstance().getServer().getRegistryManager()));
+                mc.keyboard.setClipboard(mc.currentScreen.getTitle().getString());
             }
             catch (Exception e) {
-                DupeUtils.LOGGER.error("Failed to copy GUI title JSON", e);
+                DupeUtils.LOGGER.error("Failed to copy GUI title", e);
             }
         }).position(5, 5));
 

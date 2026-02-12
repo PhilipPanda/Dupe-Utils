@@ -45,7 +45,7 @@ public class PanelButton extends Panel {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (isHovered(mouseX, mouseY)) {
-            mc.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1F));
+            xyz.dupe_utils.DupeUtils.LOGGER.info("Button clicked: {}", text.getString());
             pressAction.onPress(this);
             return true;
         }

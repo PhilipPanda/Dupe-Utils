@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +33,11 @@ public class DupeUtils implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         restoreKey = KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("Restore Saved GUI", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, "Dupe Utils")
+                new KeyBinding("Restore Saved GUI", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, new KeyBinding.Category(Identifier.of("dupe_utils", "category")))
         );
 
         unloadChunksKey = KeyBindingHelper.registerKeyBinding( // ✅ Register new key
-                new KeyBinding("Unload Rendered Chunks", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "Dupe Utils")
+                new KeyBinding("Unload Rendered Chunks", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, new KeyBinding.Category(Identifier.of("dupe_utils", "category")))
         );
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -60,7 +61,7 @@ public class DupeUtils implements ClientModInitializer {
         EVENT_BUS = new EventBus();
         EVENT_BUS.register(new ExtensionHandler());
 
-        if (!MinecraftClient.IS_SYSTEM_MAC) {
+        if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
             System.setProperty("java.awt.headless", "false");
             monospace = new Font(Font.MONOSPACED, Font.PLAIN, 10);
             darkWhite = new Color(220, 220, 220);

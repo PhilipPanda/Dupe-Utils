@@ -46,29 +46,34 @@ public abstract class Panel implements IPanel {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float deltaTime) {
-        MatrixStack matrices = context.getMatrices();
         hovered = isHovered(mouseX, mouseY);
 
         float target = hovered ? 1f : 0f;
         float speed = 0.1f;
         hoverProgress += (target - hoverProgress) * speed;
 
-        Color color = RenderEngine.colorInterpolate(
-                new Color(255, 225, 160, 230),
-                new Color(45, 45, 45, 230),
-                1f - hoverProgress
-        );
-        RenderEngine.drawRound(matrices, x, y, width, height, 3, color);
+        // Determine colors based on hover state
+        int backgroundColor = hovered ? 0xE0FFA020 : 0xE02D2D2D; // Semi-transparent orange when hovered, dark gray otherwise
+        int borderColor = hovered ? 0xFFFFD080 : 0xFF606060;
+        
+        // Draw background
+        context.fill((int)x, (int)y, (int)(x + width), (int)(y + height), backgroundColor);
+        
+        // Draw border manually (1 pixel on each side)
+        context.fill((int)x, (int)y, (int)(x + width), (int)y + 1, borderColor); // Top
+        context.fill((int)x, (int)(y + height - 1), (int)(x + width), (int)(y + height), borderColor); // Bottom
+        context.fill((int)x, (int)y, (int)x + 1, (int)(y + height), borderColor); // Left
+        context.fill((int)(x + width - 1), (int)y, (int)(x + width), (int)(y + height), borderColor); // Right
 
         if (scissor) {
             context.enableScissor((int)x, (int)y, (int)(x + width), (int)(y + height));
         }
 
-        matrices.push();
         renderContent(context, mouseX, mouseY, deltaTime);
-        matrices.pop();
 
-        context.drawText(mc.textRenderer, getTitle(), (int)(x + width / 2f - mc.textRenderer.getWidth(getTitle()) / 2f), (int)(y + height / 2f - mc.textRenderer.fontHeight / 2f), -1, true);
+        // Draw text centered
+        int textColor = hovered ? 0xFFFFFFFF : 0xFFAAAAAA;
+        context.drawText(mc.textRenderer, getTitle(), (int)(x + width / 2f - mc.textRenderer.getWidth(getTitle()) / 2f), (int)(y + height / 2f - mc.textRenderer.fontHeight / 2f), textColor, true);
 
         if (scissor) {
             context.disableScissor();

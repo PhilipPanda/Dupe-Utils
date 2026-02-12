@@ -2,7 +2,10 @@ package xyz.dupe_utils.gui.minecraft.panel;
 
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.input.KeyInput;
+import net.minecraft.client.input.CharInput;
 import net.minecraft.text.Text;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.screen.narration.NarrationPart;
@@ -26,18 +29,18 @@ public class ClickableWidgetPanel extends ClickableWidget implements Element {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(Click click, boolean doubled) {
         panel.setModifiable(false);
-        boolean value = panel.isVisible() && panel.mouseClicked((int) Math.floor(mouseX), (int) Math.floor(mouseY), button);
+        boolean value = panel.isVisible() && panel.mouseClicked((int) Math.floor(click.x()), (int) Math.floor(click.y()), click.button());
         panel.setModifiable(true);
 
         return value;
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+    public boolean mouseReleased(Click click) {
         if (panel.isVisible()) {
-            panel.mouseReleased(mouseX, mouseY, button);
+            panel.mouseReleased(click.x(), click.y(), click.button());
         }
         return true;
     }
@@ -52,14 +55,14 @@ public class ClickableWidgetPanel extends ClickableWidget implements Element {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        return panel.isVisible() && panel.keyPressed(keyCode, scanCode, modifiers);
+    public boolean keyPressed(KeyInput input) {
+        return panel.isVisible() && panel.keyPressed(input);
     }
 
     @Override
-    public boolean charTyped(char chr, int modifiers) {
+    public boolean charTyped(CharInput input) {
         if (panel.isVisible()) {
-            panel.charTyped(chr, modifiers);
+            panel.charTyped((char) input.codepoint(), input.modifiers());
         }
         return false;
     }

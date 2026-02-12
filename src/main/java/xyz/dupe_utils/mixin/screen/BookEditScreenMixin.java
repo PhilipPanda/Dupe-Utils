@@ -3,6 +3,7 @@ package xyz.dupe_utils.mixin.screen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.input.KeyInput;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,8 +29,8 @@ public class BookEditScreenMixin extends Screen {
         if (SharedVariables.enabled) {
             TextFieldWidget addressField = new TextFieldWidget(textRenderer, 5, 245, 160, 20, Text.of("Chat ...")) {
                 @Override
-                public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-                    if (keyCode == GLFW.GLFW_KEY_ENTER) {
+                public boolean keyPressed(KeyInput input) {
+                    if (input.key() == GLFW.GLFW_KEY_ENTER) {
                         if (this.getText().startsWith(".")) {
                             CommandManager.handle(this.getText());
                             this.setText("");
@@ -49,7 +50,7 @@ public class BookEditScreenMixin extends Screen {
 
                         this.setText("");
                     }
-                    return super.keyPressed(keyCode, scanCode, modifiers);
+                    return super.keyPressed(input);
                 }
             };
             addressField.setText("");
